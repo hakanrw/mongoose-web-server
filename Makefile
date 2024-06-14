@@ -56,7 +56,7 @@ test: $(EXEC)
 	kill $$pid; \
 	wait $$pid; \
 	[ $$fail == 0 ] && printf "\n+-------------+\nall tests succeeded\n+-------------+\n\n"; \
-	[ $$ret != 0 ] && printf "\n!-------------!\n%d tests failed\n!-------------!\n\n" $$fail; \
+	[ $$fail != 0 ] && printf "\n!-------------!\n%d tests failed\n!-------------!\n\n" $$fail; \
 	true
 
 # Phony targets
