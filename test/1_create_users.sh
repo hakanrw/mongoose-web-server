@@ -1,6 +1,6 @@
-http localhost:8000/api/user name=root
-http localhost:8000/api/user name=ken
-http localhost:8000/api/user name=tux
+curl -X POST -H "Content-Type: application/json" -d '{"name":"root"}' http://localhost:8000/api/user
+curl -X POST -H "Content-Type: application/json" -d '{"name":"ken"}' http://localhost:8000/api/user
+curl -X POST -H "Content-Type: application/json" -d '{"name":"tux"}' http://localhost:8000/api/user
 
 response=$(curl localhost:8000/api/user 2>/dev/null)
 
