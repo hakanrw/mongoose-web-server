@@ -1,0 +1,83 @@
+<html>
+	<head>
+		<script>
+			async function fetchUsers() {
+		      const usersElement = document.getElementById('users');
+			  usersElement.textContent = "fetching users...";
+
+			  try {
+			    const response = await fetch('/api/user');
+			    
+			    if (!response.ok) {
+			      throw new Error(`HTTP error! Status: ${response.status}`);
+			    }
+			
+			    usersElement.textContent = await response.text();
+			  } catch (error) {
+			    console.error('Error fetching users:', error);
+			    usersElement.textContent = 'error while fetching users';
+			  }
+			}
+
+			async function createUser() {
+		      const messageElement = document.getElementById('message');
+
+			  try {
+   			    messageElement.textContent = '';
+
+   			    const url = '/api/user';
+		        const requestData = {
+		          name: document.getElementById('name').value
+		        };
+			    
+		        const response = await fetch(url, {
+		          method: 'POST',
+		          headers: {
+		            'Content-Type': 'application/json'
+		          },
+		          body: JSON.stringify(requestData)
+		        });
+			    
+		        if (!response.ok) {
+		          throw new Error(`HTTP error! Status: ${response.status}`);
+		        }
+
+			    messageElement.textContent = 'user created!';
+
+			    fetchUsers();			    
+			  } catch (error) {
+			  	console.error('Error creating user:', error);
+			  	messageElement.textContent = 'error while creating user';
+			  }
+			}
+		</script>
+	</head>
+
+	<body>
+		<p><b>mongoose user server</b></p>
+		<p>proudly built with C.</p>
+		<hr>
+		<div>
+			<span>user creation</span>
+			<label for="name">username:</label>
+			<input type="text" id="name" name="name">
+			<button onclick="createUser()">create user</button>
+			<br>
+			<span id="message"></span>
+		<div>
+		<hr>
+		<p>users:</p>
+		<div id="users" style="white-space: pre-line;">fetching users...</div>
+
+		<script>
+			fetchUsers();
+
+			const nameInput = document.getElementById("name");
+			nameInput.addEventListener("keydown", function (e) {
+			    if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+			        createUser();
+			    }
+			});
+		</script>
+	</body>
+</html>
