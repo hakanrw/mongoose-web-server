@@ -51,11 +51,11 @@ test: $(EXEC)
 		sh "$$test"; \
 		ret=$$?; \
 		[ $$ret != 0 ] && fail=$$((fail + 1)) && printf "\n!-------------!\ntest %s failed\n!-------------!\n" $$test; \
-		[ $$ret == 0 ] && printf "\n+-------------+\ntest %s succeeded\n+-------------+\n" $$test; \
+		[ $$ret = 0 ] && printf "\n+-------------+\ntest %s succeeded\n+-------------+\n" $$test; \
 	done; \
 	kill $$pid; \
 	wait $$pid; \
-	[ $$fail == 0 ] && printf "\n+-------------+\nall tests succeeded\n+-------------+\n\n"; \
+	[ $$fail = 0 ] && printf "\n+-------------+\nall tests succeeded\n+-------------+\n\n"; \
 	[ $$fail != 0 ] && printf "\n!-------------!\n%d tests failed\n!-------------!\n\n" $$fail; \
 	true
 

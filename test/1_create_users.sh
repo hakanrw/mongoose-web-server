@@ -14,17 +14,17 @@ while read -r line; do
 
 	echo $id $name
 
-	if [ "$count" == 0 ] && [ "$name" != root ]; then
+	if [ "$count" = 0 ] && [ "$name" != root ]; then
 		echo "expected id=0 to be root, got $name"
 		exit 1
 	fi
 	
-	if [ "$count" == 1 ] && [ "$name" != ken ]; then
+	if [ "$count" = 1 ] && [ "$name" != ken ]; then
 		echo "expected id=1 to be ken, got $name"
 		exit 1
 	fi
 	
-	if [ "$count" == 2 ] && [ "$name" != tux ]; then
+	if [ "$count" = 2 ] && [ "$name" != tux ]; then
 		echo "expected id=2 to be tux, got $name"
 		exit 1
 	fi
