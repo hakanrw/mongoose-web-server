@@ -4,8 +4,8 @@ curl -X POST -H "Content-Type: application/json" -d '{"name":"tux"}' http://loca
 
 response=$(curl localhost:8000/api/user/2 2>/dev/null)
 
-id=$(echo "$response" | awk '{match($0, /id: ([0-9]+),/, arr); print arr[1]}')
-name=$(echo "$response" | awk '{match($0, /name: ([a-zA-Z]+),/, arr); print arr[1]}')
+id=$(echo "$response" | gawk '{match($0, /id: ([0-9]+),/, arr); print arr[1]}')
+name=$(echo "$response" | gawk '{match($0, /name: ([a-zA-Z]+),/, arr); print arr[1]}')
 
 echo "$id" "$name"
 
