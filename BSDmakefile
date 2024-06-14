@@ -1,15 +1,15 @@
 .PHONY: all
 all:
-	gmake all
+	@(cd ${.CURDIR} && gmake all)
 
 .PHONY: clean
 clean:
-	gmake clean
+	@(cd ${.CURDIR} && gmake clean)
 
 .PHONY: run
 run:
-	gmake run
+	@(cd ${.CURDIR} && gmake run)
 
-.PHONY: run
+.PHONY: test
 test:
-	gmake test
+	@(cd ${.CURDIR} && gmake test)
