@@ -1,6 +1,6 @@
 printf "spamming users"
 
-for i in {1..128}; do
+for i in $(seq 1 128); do
 	response=$(curl -X POST -H "Content-Type: application/json" -d '{"name":"user$i"}' http://localhost:8000/api/user -m 5 2>&1)
 	
 	if [ $? != 0 ]; then
