@@ -10,6 +10,8 @@
 user_t users[USER_COUNT];
 uint32_t user_index = 0;
 
+#define RESPONSE_LENGTH 2048
+
 void user_id_handler(struct mg_connection *c, struct mg_http_message *hm,
                      uint32_t id) {
   if (id >= user_index) {
@@ -18,9 +20,9 @@ void user_id_handler(struct mg_connection *c, struct mg_http_message *hm,
   }
 
   if (mg_strcmp(hm->method, mg_str("GET")) == 0) {
-    char response[1024] = {0};
+    char response[RESPONSE_LENGTH] = {0};
     const user_t *user = &users[id];
-    snprintf(response, 1024, "user { id: %d, name: %s, reg_date: %ld }\n",
+    snprintf(response, RESPONSE_LENGTH, "user { id: %d, name: %s, reg_date: %ld }\n",
              user->id, user->name, user->reg_date);
 
     mg_http_reply(c, 200, "", response); // method not allowed
@@ -51,10 +53,10 @@ void user_handler(struct mg_connection *c, struct mg_http_message *hm) {
 
     mg_http_reply(c, 200, "", "User created.\n");
   } else if (mg_strcmp(hm->method, mg_str("GET")) == 0) {
-    char response[1024] = {0};
+    char response[RESPONSE_LENGTH] = {0};
     int offset = 0;
-    for (size_t i = 0; i < user_index && offset < 1024; i++) {
-      offset += snprintf(response + offset, 1024 - offset,
+    for (size_t i = 0; i < user_index && offset < RESPONSE_LENGTH; i++) {
+      offset += snprintf(response + offset, RESPONSE_LENGTH - offset,
                          "user { id: %d, name: %s, reg_date: %ld }\n",
                          users[i].id, users[i].name, users[i].reg_date);
     }
