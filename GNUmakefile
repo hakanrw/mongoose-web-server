@@ -60,7 +60,7 @@ test: $(EXEC)
 		total=$$((total + 1)); \
 		sh "$$test"; \
 		ret=$$?; \
-		[ $$ret != 0 ] && fail=$$((fail + 1)) && printf "\n$${RED}!-------------!\n$${RED}test %s failed\n!$${RED}-------------!\n\n$${RESET}" $$test; \
+		[ $$ret != 0 ] && fail=$$((fail + 1)) && printf "\n$${RED}!-------------!\n$${RED}test %s failed\n$${RED}!-------------!\n\n$${RESET}" $$test; \
 		[ $$ret = 0 ] && printf "\n$${GREEN}+-------------+\n$${GREEN}test %s succeeded\n$${GREEN}+-------------+\n\n$${RESET}" $$test; \
 		kill $$pid; \
 		wait $$pid 2>/dev/null; \
