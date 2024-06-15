@@ -40,30 +40,30 @@ run: $(EXEC)
 	./$(EXEC)
 
 test: $(EXEC)
-	@RED='\033[31m'; \
-	GREEN='\033[32m'; \
-	YELLOW='\033[33m'; \
-	BLUE='\033[34m'; \
-	MAGENTA='\033[35m'; \
-	CYAN='\033[36m'; \
-	WHITE='\033[37m'; \
+	@RED='\033[0;31m'; \
+	GREEN='\033[0;32m'; \
+	YELLOW='\033[0;33m'; \
+	BLUE='\033[0;34m'; \
+	MAGENTA='\033[0;35m'; \
+	CYAN='\033[0;36m'; \
+	WHITE='\033[0;37m'; \
 	RESET='\033[0m'; \
 	fail=0; \
 	total=0; \
 	for test in test/*; do \
-		printf "$${YELLOW}\n+-------------+\nrunning test %s\n+-------------+\n\n$${RESET}" $$test; \
+		printf "\n$${YELLOW}+-------------+\n$${YELLOW}running test %s\n$${YELLOW}+-------------+\n\n$${RESET}" $$test; \
 		./$(EXEC) & pid=$$!; \
 		sleep 0.5; echo; \
 		total=$$((total + 1)); \
 		sh "$$test"; \
 		ret=$$?; \
-		[ $$ret != 0 ] && fail=$$((fail + 1)) && printf "$${RED}\n!-------------!\ntest %s failed\n!-------------!\n\n$${RESET}" $$test; \
-		[ $$ret = 0 ] && printf "$${GREEN}\n+-------------+\ntest %s succeeded\n+-------------+\n\n$${RESET}" $$test; \
+		[ $$ret != 0 ] && fail=$$((fail + 1)) && printf "\n$${RED}!-------------!\n$${RED}test %s failed\n!$${RED}-------------!\n\n$${RESET}" $$test; \
+		[ $$ret = 0 ] && printf "\n$${GREEN}+-------------+\ntest %s succeeded\n+-------------+\n\n$${RESET}" $$test; \
 		kill $$pid; \
 		wait $$pid; \
 	done; \
-	[ $$fail = 0 ] && printf "$${GREEN}\n+-------------+\n%d tests succeeded\n+-------------+\n\n$${RESET}" $$total; \
-	[ $$fail != 0 ] && printf "$${RED}\n!-------------!\n%d tests failed\n!-------------!\n\n$${RESET}" $$fail; \
+	[ $$fail = 0 ] && printf "\n$${GREEN}+-------------+\n$${GREEN}%d tests succeeded\n$${GREEN}+-------------+\n\n$${RESET}" $$total; \
+	[ $$fail != 0 ] && printf "\n$${RED}!-------------!\n$${RED}%d tests failed\n$${RED}!-------------!\n\n$${RESET}" $$fail; \
 	true
 
 # Phony targets
