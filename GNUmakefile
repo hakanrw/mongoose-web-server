@@ -63,7 +63,7 @@ test: $(EXEC)
 		[ $$ret != 0 ] && fail=$$((fail + 1)) && printf "\n$${RED}!-------------!\n$${RED}test %s failed\n!$${RED}-------------!\n\n$${RESET}" $$test; \
 		[ $$ret = 0 ] && printf "\n$${GREEN}+-------------+\n$${GREEN}test %s succeeded\n$${GREEN}+-------------+\n\n$${RESET}" $$test; \
 		kill $$pid; \
-		wait $$pid; \
+		wait $$pid 2>/dev/null; \
 	done; \
 	[ $$fail = 0 ] && printf "\n$${GREEN}+-------------+\n$${GREEN}%d tests succeeded\n$${GREEN}+-------------+\n\n$${RESET}" $$total; \
 	[ $$fail != 0 ] && printf "\n$${RED}!-------------!\n$${RED}%d tests failed\n$${RED}!-------------!\n\n$${RESET}" $$fail; \
