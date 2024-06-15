@@ -20,8 +20,8 @@ void user_id_handler(struct mg_connection *c, struct mg_http_message *hm,
   if (mg_strcmp(hm->method, mg_str("GET")) == 0) {
     char response[1024] = {0};
     const user_t *user = &users[id];
-    sprintf(response, "user { id: %d, name: %s, reg_date: %ld }\n", user->id,
-            user->name, user->reg_date);
+    snprintf(response, 1024, "user { id: %d, name: %s, reg_date: %ld }\n",
+             user->id, user->name, user->reg_date);
 
     mg_http_reply(c, 200, "", response); // method not allowed
   } else {
@@ -33,7 +33,12 @@ void user_handler(struct mg_connection *c, struct mg_http_message *hm) {
   if (mg_strcmp(hm->method, mg_str("POST")) == 0) {
     char *name = mg_json_get_str(hm->body, "$.name");
     if (name == NULL) {
-      mg_http_reply(c, 400, "", "Name is null\n"); // bad request
+      mg_http_reply(c, 400, "", "Name is null.\n"); // bad request
+      return;
+    }
+
+    if (user_index >= USER_COUNT) {
+      mg_http_reply(c, 403, "", "Maximum user count reached.\n"); // forbidden
       return;
     }
 
@@ -48,10 +53,10 @@ void user_handler(struct mg_connection *c, struct mg_http_message *hm) {
   } else if (mg_strcmp(hm->method, mg_str("GET")) == 0) {
     char response[1024] = {0};
     int offset = 0;
-    for (size_t i = 0; i < user_index; i++) {
-      offset += sprintf(response + offset,
-                        "user { id: %d, name: %s, reg_date: %ld }\n",
-                        users[i].id, users[i].name, users[i].reg_date);
+    for (size_t i = 0; i < user_index && offset < 1024; i++) {
+      offset += snprintf(response + offset, 1024 - offset,
+                         "user { id: %d, name: %s, reg_date: %ld }\n",
+                         users[i].id, users[i].name, users[i].reg_date);
     }
 
     mg_http_reply(c, 200, "", response);
