@@ -9,7 +9,8 @@ for i in {1..128}; do
 		exit 1 # fail on no-response
 	fi
 
-	if ((i % 4 == 0)); then 
+	quad=$((i % 4))
+	if [ "$quad" -eq 0 ]; then 
 		printf . # progress bar
 	fi
 done
