@@ -1,6 +1,6 @@
-curl -X POST -H "Content-Type: application/json" -d '{"name":"root"}' http://localhost:8000/api/user
-curl -X POST -H "Content-Type: application/json" -d '{"name":"ken"}' http://localhost:8000/api/user
-curl -X POST -H "Content-Type: application/json" -d '{"name":"tux"}' http://localhost:8000/api/user
+curl -X POST -H "Content-Type: application/json" -d '{"name":"root"}' http://localhost:8000/api/user 2>/dev/null
+curl -X POST -H "Content-Type: application/json" -d '{"name":"ken"}' http://localhost:8000/api/user 2>/dev/null
+curl -X POST -H "Content-Type: application/json" -d '{"name":"tux"}' http://localhost:8000/api/user 2>/dev/null
 
 response=$(curl localhost:8000/api/user/2 2>/dev/null)
 
@@ -11,4 +11,5 @@ echo "$id" "$name"
 
 if [ "$id" != 2 ] || [ "$name" != tux ]; then
 	echo "expected user tux with id 2, got $name and $id"
+	exit 1
 fi

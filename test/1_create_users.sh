@@ -1,6 +1,6 @@
-curl -X POST -H "Content-Type: application/json" -d '{"name":"root"}' http://localhost:8000/api/user
-curl -X POST -H "Content-Type: application/json" -d '{"name":"ken"}' http://localhost:8000/api/user
-curl -X POST -H "Content-Type: application/json" -d '{"name":"tux"}' http://localhost:8000/api/user
+curl -X POST -H "Content-Type: application/json" -d '{"name":"root"}' http://localhost:8000/api/user 2>/dev/null
+curl -X POST -H "Content-Type: application/json" -d '{"name":"ken"}' http://localhost:8000/api/user 2>/dev/null
+curl -X POST -H "Content-Type: application/json" -d '{"name":"tux"}' http://localhost:8000/api/user 2>/dev/null
 
 response=$(curl localhost:8000/api/user 2>/dev/null)
 tempfile=$(mktemp)

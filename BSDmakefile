@@ -40,21 +40,22 @@ run: $(EXEC)
 	./$(EXEC)
 
 test: $(EXEC)
-	@printf "\n+-------------+\nrunning tests...\n+-------------+\n\n"; \
-	./$(EXEC) & pid=$$!; \
-	sleep 1; \
-	fail=0; \
+	@fail=0; \
+	total=0; \
 	for test in test/*; do \
-		printf "\n+-------------+\nrunning test %s\n+-------------+\n\n" $$test; \
+		printf "${YELLOW}\n+-------------+\nrunning test %s\n+-------------+\n\n${RESET}" $$test; \
+		./$(EXEC) & pid=$$!; \
+		sleep 0.5; echo; \
+		total=$$((total + 1)); \
 		sh "$$test"; \
 		ret=$$?; \
-		[ $$ret != 0 ] && fail=$$((fail + 1)) && printf "\n!-------------!\ntest %s failed\n!-------------!\n" $$test; \
-		[ $$ret = 0 ] && printf "\n+-------------+\ntest %s succeeded\n+-------------+\n" $$test; \
+		[ $$ret != 0 ] && fail=$$((fail + 1)) && printf "${RED}\n!-------------!\ntest %s failed\n!-------------!\n\n${RESET}" $$test; \
+		[ $$ret = 0 ] && printf "${GREEN}\n+-------------+\ntest %s succeeded\n+-------------+\n\n${RESET}" $$test; \
+		kill $$pid; \
+		wait $$pid; \
 	done; \
-	kill $$pid; \
-	wait $$pid; \
-	[ $$fail = 0 ] && printf "\n+-------------+\nall tests succeeded\n+-------------+\n\n"; \
-	[ $$fail != 0 ] && printf "\n!-------------!\n%d tests failed\n!-------------!\n\n" $$fail; \
+	[ $$fail = 0 ] && printf "${GREEN}\n+-------------+\n%d tests succeeded\n+-------------+\n\n${RESET}" $$total; \
+	[ $$fail != 0 ] && printf "${RED}\n!-------------!\n%d tests failed\n!-------------!\n\n${RESET}" $$fail; \
 	true
 
 # Phony targets

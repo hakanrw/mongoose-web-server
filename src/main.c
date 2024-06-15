@@ -89,6 +89,7 @@ void ev_handler(struct mg_connection *c, int ev, void *ev_data) {
 
 int main(void) {
   printf("starting...\n");
+  fflush(stdout);
   struct mg_mgr mgr; // Declare event manager
   mg_mgr_init(&mgr); // Initialise event manager
 
@@ -101,6 +102,7 @@ int main(void) {
   }
 
   printf("started mongoose server at %s\n", BIND);
+  fflush(stdout);
 
   for (;;) { // Run an infinite event loop
     mg_mgr_poll(&mgr, 1000);
