@@ -6,7 +6,7 @@
 
 #define BIND "http://0.0.0.0:8000"
 
-#define USER_COUNT 128
+#define USER_COUNT 64
 user_t users[USER_COUNT];
 uint32_t user_index = 0;
 
