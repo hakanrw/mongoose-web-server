@@ -1,7 +1,7 @@
-TARGET_NAME=web
+TARGET_NAME = web
 
 # Compiler and flags
-CFLAGS ?= -Wall -Wextra
+CFLAGS ?= -Wall -Wextra -pedantic
 
 # Directories
 SRC_DIR = src

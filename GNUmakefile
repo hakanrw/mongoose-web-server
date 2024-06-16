@@ -1,11 +1,7 @@
-TARGET_NAME=web
-
-ifndef TARGET_NAME
-$(error TARGET_NAME is not set)
-endif
+TARGET_NAME = web
 
 # Compiler and flags
-CFLAGS ?= -Wall -Wextra
+CFLAGS ?= -Wall -Wextra -pedantic
 
 # Directories
 SRC_DIR = src
