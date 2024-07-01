@@ -24,7 +24,7 @@ void user_id_handler(struct mg_connection *c, struct mg_http_message *hm,
     char response[RESPONSE_LENGTH] = {0};
     const user_t *user = &users[id];
     snprintf(response, RESPONSE_LENGTH, "user { id: %d, name: %s, reg_date: %ld }\n",
-             user->id, user->name, user->reg_date);
+             user->id, user->name, (long) user->reg_date);
 
     mg_http_reply(c, 200, "", response); // method not allowed
   } else {
@@ -59,7 +59,7 @@ void user_handler(struct mg_connection *c, struct mg_http_message *hm) {
     for (size_t i = 0; i < user_index && offset < RESPONSE_LENGTH; i++) {
       offset += snprintf(response + offset, RESPONSE_LENGTH - offset,
                          "user { id: %d, name: %s, reg_date: %ld }\n",
-                         users[i].id, users[i].name, users[i].reg_date);
+                         users[i].id, users[i].name, (long) users[i].reg_date);
     }
 
     mg_http_reply(c, 200, "", response);
