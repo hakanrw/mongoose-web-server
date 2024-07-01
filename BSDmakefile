@@ -2,6 +2,7 @@ TARGET_NAME = web
 
 # Compiler and flags
 CFLAGS ?= -Wall -Wextra -pedantic
+LDFLAGS ?= 
 
 # Directories
 SRC_DIR = src
@@ -26,7 +27,7 @@ all: $(EXEC)
 # Rule for creating the executable
 $(EXEC): $(OBJS)
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) ${OBJS} -o ${.TARGET}
+	$(CC) $(CFLAGS) ${OBJS} -o ${.TARGET} $(LDFLAGS)
 
 $(OBJS): $(@:${OBJ_DIR}/%.o=${SRC_DIR}/%.c)	
 	@mkdir -p $(@D)
