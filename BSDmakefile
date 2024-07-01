@@ -10,8 +10,8 @@ OBJ_DIR = obj
 BIN_DIR = bin
 
 # Files
-SRCS = src/mongoose.c src/main.c
-DEPS = src/include/mongoose.h src/include/user.h
+SRCS = src/mongoose.c src/main.c src/arch.c
+DEPS = src/include/mongoose.h src/include/user.h src/include/arch.h
 
 OBJS = ${SRCS:${SRC_DIR}/%.c=${OBJ_DIR}/%.o}
 

@@ -1,5 +1,6 @@
 #include "include/mongoose.h"
 #include "include/user.h"
+#include "include/arch.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <time.h>
@@ -81,7 +82,12 @@ void ev_handler(struct mg_connection *c, int ev, void *ev_data) {
       uint32_t id;
       mg_str_to_num(params[0], 10, (void *)&id, sizeof(id));
       user_id_handler(c, hm, id);
-    } else {
+    } else if (mg_match(hm->uri, mg_str("/api/server"), NULL)) {
+      char server[32];
+      snprintf(server, 32, "%s %s", get_architecture(), get_os());
+      mg_http_reply(c, 200, "", server);
+    }
+    else {
       mg_http_serve_dir(c, hm, &opts);
     }
   }
@@ -89,7 +95,10 @@ void ev_handler(struct mg_connection *c, int ev, void *ev_data) {
 
 int main(void) {
   printf("starting...\n");
+  printf("arch: %s\n", get_architecture());
+  printf("os: %s\n", get_os());
   fflush(stdout);
+
   struct mg_mgr mgr; // Declare event manager
   mg_mgr_init(&mgr); // Initialise event manager
 
