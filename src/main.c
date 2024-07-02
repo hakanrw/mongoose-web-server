@@ -83,8 +83,8 @@ void ev_handler(struct mg_connection *c, int ev, void *ev_data) {
       mg_str_to_num(params[0], 10, (void *)&id, sizeof(id));
       user_id_handler(c, hm, id);
     } else if (mg_match(hm->uri, mg_str("/api/server"), NULL)) {
-      char server[32];
-      snprintf(server, 32, "%s %s", get_architecture(), get_os());
+      char server[64];
+      snprintf(server, 32, "%s %s %s", get_architecture(), get_os(), get_compiler());
       mg_http_reply(c, 200, "", server);
     }
     else {

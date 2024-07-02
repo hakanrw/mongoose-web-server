@@ -92,7 +92,7 @@
   </ItemGroup>
 
   <Target Name="Run" DependsOnTargets="Build">
-    <Exec Command="start $(OutDir)\mongoose-web-server.exe" />
+    <Exec Command="$(OutDir)\mongoose-web-server.exe" />
   </Target>
 
 </Project>
