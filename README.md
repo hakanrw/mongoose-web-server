@@ -21,7 +21,7 @@ make run
 
 msvc (windows):
 ```cmd
-msbuild /p:Run=true
+msbuild /t:Run
 ```
 
 ## testing
