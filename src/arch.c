@@ -43,14 +43,16 @@ const char* get_os(void) {
 }
 
 const char* get_compiler(void) {
-    #if defined(__clang__)
-        return "Clang";
-    #elif defined(__GNUC__) || defined(__GNUG__)
+    #if defined(__GNUC__) || defined(__GNUG__)
         return "GCC";
-    #elif defined(_MSC_VER)
-        return "MSVC";
     #elif defined(__ICC) || defined(__INTEL_COMPILER)
         return "Intel ICC/ICL";
+    #elif defined(__ICC) || defined(__INTEL_LLVM_COMPILER)
+        return "Intel ICX";
+    #elif defined(__clang__)
+        return "Clang";
+    #elif defined(_MSC_VER)
+        return "MSVC";
     #else
         return "Unknown";
     #endif
