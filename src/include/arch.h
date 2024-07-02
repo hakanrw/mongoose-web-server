@@ -1,3 +1,3 @@
-const char* get_architecture();
+const char* get_architecture(void);
 
-const char* get_os();
+const char* get_os(void);

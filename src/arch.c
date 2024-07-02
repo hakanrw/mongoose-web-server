@@ -1,6 +1,6 @@
 #include "include/arch.h"
 
-const char* get_architecture() {
+const char* get_architecture(void) {
     #if defined(__x86_64__) || defined(_M_X64)
         return "x86_64";
     #elif defined(__i386) || defined(_M_IX86)
@@ -22,7 +22,7 @@ const char* get_architecture() {
     #endif
 }
 
-const char* get_os() {
+const char* get_os(void) {
     #if defined(_WIN32) || defined(_WIN64)
         return "Windows";
     #elif defined(__APPLE__) || defined(__MACH__)
