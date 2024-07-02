@@ -42,7 +42,7 @@ const char* get_os(void) {
     #endif
 }
 
-const char* get_compiler() {
+const char* get_compiler(void) {
     #if defined(__clang__)
         return "Clang";
     #elif defined(__GNUC__) || defined(__GNUG__)
