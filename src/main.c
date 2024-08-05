@@ -5,8 +5,6 @@
 #include <stdio.h>
 #include <time.h>
 
-#define BIND "http://0.0.0.0:8000"
-
 #define USER_COUNT 64
 user_t users[USER_COUNT];
 uint32_t user_index = 0;
@@ -102,15 +100,27 @@ int main(void) {
   struct mg_mgr mgr; // Declare event manager
   mg_mgr_init(&mgr); // Initialise event manager
 
+  char bind_addr[256];
+
+  const char* addr = "http://0.0.0.0";
+  const char* port = getenv("PORT");
+
+  if (port == NULL) {
+    snprintf(bind_addr, 256, "%s:%s", addr, "8000");
+  } else {
+    snprintf(bind_addr, 256, "%s:%s", addr, port);
+  }
+
+
   struct mg_connection *conn =
-      mg_http_listen(&mgr, BIND, ev_handler, NULL); // Setup listener
+      mg_http_listen(&mgr, bind_addr, ev_handler, NULL); // Setup listener
 
   if (conn == NULL) {
     perror("mg_http_listen");
     return 1;
   }
 
-  printf("started mongoose server at %s\n", BIND);
+  printf("started mongoose server at %s\n", bind_addr);
   fflush(stdout);
 
   for (;;) { // Run an infinite event loop
