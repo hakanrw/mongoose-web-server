@@ -17,6 +17,10 @@ const char* get_architecture(void) {
         return "MIPS";
     #elif defined(__riscv)
         return "RISC-V";
+    #elif defined(__SH4__)
+        return "SH4";
+    #elif defined(__alpha__)
+        return "Alpha";
     #else
         return "Unknown";
     #endif
@@ -55,5 +59,23 @@ const char* get_compiler(void) {
         return "MSVC";
     #else
         return "Unknown";
+    #endif
+}
+
+const char* get_libc(void) {
+    #if defined(__GLIBC__) || defined(__GLIBC_MINOR__)
+        return "Glibc";
+    #elif defined(__musl__)
+        return "Musl";
+    #elif defined(__BIONIC__)
+        return "Bionic";
+    #elif defined(__NEWLIB__)
+        return "newlib";
+    #elif defined(_MSC_VER)
+        return "MSVCRT"
+    #elif defined(__MINGW32__)
+        return "MinGW";
+    #else
+        return "Unkown";
     #endif
 }

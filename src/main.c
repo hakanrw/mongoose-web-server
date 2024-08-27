@@ -82,7 +82,7 @@ void ev_handler(struct mg_connection *c, int ev, void *ev_data) {
       user_id_handler(c, hm, id);
     } else if (mg_match(hm->uri, mg_str("/api/server"), NULL)) {
       char server[64];
-      snprintf(server, 32, "%s %s %s", get_architecture(), get_os(), get_compiler());
+      snprintf(server, 64, "%s %s %s %s", get_os(), get_architecture(), get_libc(), get_compiler());
       mg_http_reply(c, 200, "", server);
     }
     else {
@@ -93,8 +93,11 @@ void ev_handler(struct mg_connection *c, int ev, void *ev_data) {
 
 int main(void) {
   printf("starting...\n");
-  printf("arch: %s\n", get_architecture());
   printf("os: %s\n", get_os());
+  printf("arch: %s\n", get_architecture());
+  printf("libc: %s\n", get_libc());
+  printf("compiler: %s\n", get_compiler());
+
   fflush(stdout);
 
   struct mg_mgr mgr; // Declare event manager
