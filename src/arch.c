@@ -6,17 +6,21 @@ const char* get_architecture(void) {
     #elif defined(__i386) || defined(_M_IX86)
         return "i386";
     #elif defined(__aarch64__)
-        return "ARM64";
+        return "AArch64";
     #elif defined(__arm__) || defined(_M_ARM)
         return "ARM";
     #elif defined(__powerpc64__) || defined(__ppc64__)
         return "PowerPC64";
     #elif defined(__powerpc__) || defined(__ppc__)
         return "PowerPC";
+    #elif defined(__mips64)
+        return "MIPS64";
     #elif defined(__mips__) || defined(__mips)
         return "MIPS";
+    #elif defined(__riscv64)
+        return "RiscV64";
     #elif defined(__riscv)
-        return "RISC-V";
+        return "RiscV";
     #elif defined(__SH4__)
         return "SH4";
     #elif defined(__alpha__)
