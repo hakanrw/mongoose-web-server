@@ -25,6 +25,8 @@ const char* get_architecture(void) {
         return "SH4";
     #elif defined(__alpha__)
         return "Alpha";
+    #elif defined(__m68k__)
+        return "m68k";
     #else
         return "Unknown";
     #endif
