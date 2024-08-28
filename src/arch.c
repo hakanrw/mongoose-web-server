@@ -74,9 +74,9 @@ const char* get_libc(void) {
     #elif defined(__BIONIC__)
         return "Bionic";
     #elif defined(__NEWLIB__)
-        return "newlib";
+        return "Newlib";
     #elif defined(_MSC_VER)
-        return "MSVCRT"
+        return "MSVCRT";
     #elif defined(__MINGW32__)
         return "MinGW";
     #else
