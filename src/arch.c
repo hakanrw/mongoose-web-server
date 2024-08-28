@@ -43,6 +43,8 @@ const char* get_os(void) {
         return "NetBSD";
     #elif defined(__OpenBSD__)
         return "OpenBSD";
+    #elif defined(__DragonFly__)
+        return "DragonFlyBSD";
     #elif defined(__unix__) || defined(__unix)
         return "Unix";
     #else
@@ -80,6 +82,6 @@ const char* get_libc(void) {
     #elif defined(__MINGW32__)
         return "MinGW";
     #else
-        return "Unkown";
+        return "Libc";
     #endif
 }
