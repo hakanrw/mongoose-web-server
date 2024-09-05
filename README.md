@@ -43,4 +43,4 @@ windows (msvc): test suite on windows not supported at this time.
 ## license
 Copyright (c) 2024 Hakan Candar All rights reserved.
 
-This source code is licensed under the BSD 2-Clause License found in the LICENSE file in the root directory of this source tree.
+This source code is licensed under the GNU General Public License V2 found in the LICENSE file in the root directory of this source tree.
