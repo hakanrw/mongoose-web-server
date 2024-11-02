@@ -35,6 +35,8 @@ const char* get_architecture(void) {
 const char* get_os(void) {
     #if defined(_WIN32) || defined(_WIN64)
         return "Windows";
+    #elif defined(__GNU__)
+        return "GNU";
     #elif defined(__APPLE__) || defined(__MACH__)
         return "macOS";
     #elif defined(__linux__)
